@@ -1,0 +1,17 @@
+This directory will contain sound effects for the retro OS experience.
+Due to the requirement not to include binary files, please add your own sound files or use audio libraries.
+
+Recommended files:
+- click.mp3
+- double-click.mp3
+- error.mp3
+- system-beep.mp3
+- boot-complete.mp3
+- minimize.mp3
+- maximize.mp3
+- close.mp3
+- drag.mp3
+- drop.mp3
+- resize.mp3
+- keypress.mp3
+- achievement.mp3
