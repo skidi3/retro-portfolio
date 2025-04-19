@@ -30,77 +30,70 @@ const Window: React.FC<WindowProps> = ({
   const [isResizing, setIsResizing] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [preMaximizeState, setPreMaximizeState] = useState({ position, size });
-  
-  // Store window dimensions
+
   useEffect(() => {
     if (!isMaximized) {
       setPreMaximizeState({ position, size });
     }
   }, [position, size, isMaximized]);
-  
-  // Activate window on click
+
   const handleWindowClick = () => {
     if (!active) {
       activateWindow(id);
       playSound('click');
     }
   };
-  
-  // Handle window controls
+
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
     playSound('close');
     closeWindow(id);
   };
-  
+
   const handleMinimize = (e: React.MouseEvent) => {
     e.stopPropagation();
     playSound('minimize');
     minimizeWindow(id);
   };
-  
+
   const handleMaximize = (e: React.MouseEvent) => {
     e.stopPropagation();
     playSound('maximize');
     
     if (isMaximized) {
-      // Restore previous state
       updateWindowPosition(id, preMaximizeState.position);
       updateWindowSize(id, preMaximizeState.size);
     } else {
-      // Maximize window
       updateWindowPosition(id, { x: 0, y: 0 });
       updateWindowSize(id, {
         width: window.innerWidth,
-        height: window.innerHeight - 40 // Account for taskbar
+        height: window.innerHeight - 40
       });
     }
     setIsMaximized(!isMaximized);
   };
-  
-  // Handle drag start/end
+
   const handleDragStart = () => {
     if (isMaximized) return;
     activateWindow(id);
     setIsDragging(true);
     playSound('drag');
   };
-  
+
   const handleDragStop = (_: any, data: { x: number; y: number }) => {
     if (isMaximized) return;
     setIsDragging(false);
     updateWindowPosition(id, { x: data.x, y: data.y });
     playSound('drop');
   };
-  
-  // Handle resize start/end
+
   const handleResizeStart = () => {
     if (isMaximized) return;
     activateWindow(id);
     setIsResizing(true);
     playSound('resize');
   };
-  
+
   const handleResizeStop = (_: any, _direction: any, ref: HTMLElement, _delta: any, position: { x: number; y: number }) => {
     if (isMaximized) return;
     setIsResizing(false);
@@ -130,46 +123,46 @@ const Window: React.FC<WindowProps> = ({
       dragHandleClassName="window-titlebar"
     >
       <div 
-        className={`flex flex-col h-full rounded-t border ${
+        className={`flex flex-col h-full rounded-lg overflow-hidden backdrop-blur-md ${
           active 
-            ? 'border-blue-800 shadow-lg' 
-            : 'border-gray-500 shadow'
+            ? 'shadow-2xl shadow-black/20 border border-[#ca942c]/20' 
+            : 'shadow-xl border border-white/10'
         }`}
       >
-        {/* Window title bar */}
         <div 
-          className={`window-titlebar flex items-center justify-between px-2 py-1 ${
-            active ? 'bg-blue-800 text-white' : 'bg-gray-500 text-gray-100'
-          }`}
+          className={`window-titlebar flex items-center justify-between px-3 py-2 ${
+            active 
+              ? 'bg-[#ca942c] bg-[url(\'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TtSIVBTuIOGSoThZERRy1CkWoEGqFVh1MLv2CJg1Jiouj4Fpw8GOx6uDirKuDqyAIfoA4OTopukiJ/0sKLWI8OO7Hu3uPu3eAUC8zzeoYBzTdNlOJuJjJroqhVwQxghDiiMjM1OckKQXf8XWPAF/vYjzL/9yfo1fNWQwIiMSzzDBt4g3i6U3b4LxPHGFFWSU+Jx4z6YLEj1xXPH7jXHBZ4JkRM52aJ44Qi4U2VtqYFU2NeIo4qmo65QsZj1XOW5y1cpU178lfGM7pK8tcpzmEBBaxBIk6UlBFCWW0UYONOl0nxUKKznE//oGrT4GcUqg0YODgMRqGwC93/5+9u7UwMeEmBWJA94ttf4wAoV2g0bLt72Pbbp0A/mfgSuv4a02g+Et6ra0FHwCD28DFdVuT94DLHWDwSZcMyZH8NIVCAXg/o2/KAYNboHfN7a21j9MHIENdLd0AB4fASJGy133e3d3Z279nWv39AFlNcp0UUpxCAAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+ULHhQMEwQr/aYAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAFElEQVRo3u3BAQ0AAADCoPdPbQ43oAAAAAAAfgwNOgABa5xH6wAAAABJRU5ErkJggg==\')]' 
+              : 'bg-gray-800'
+          } text-black`}
         >
-          <div className="flex items-center">
-            <Icon className="w-4 h-4 mr-2" />
-            <div className="text-sm font-bold">{title}</div>
+          <div className="flex items-center space-x-2">
+            <Icon className="w-4 h-4" />
+            <div className="text-sm font-medium">{title}</div>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center space-x-1">
             <button 
-              className="p-1 hover:bg-gray-700 mr-1"
+              className="p-1 hover:bg-black/20 rounded transition-colors"
               onClick={handleMinimize}
             >
-              <Minus className="w-3 h-3" />
+              <Minus className="w-3.5 h-3.5" />
             </button>
             <button 
-              className="p-1 hover:bg-gray-700 mr-1"
+              className="p-1 hover:bg-black/20 rounded transition-colors"
               onClick={handleMaximize}
             >
-              <Square className="w-3 h-3" />
+              <Square className="w-3.5 h-3.5" />
             </button>
             <button 
-              className="p-1 hover:bg-red-700"
+              className="p-1 hover:bg-red-900/30 rounded transition-colors"
               onClick={handleClose}
             >
-              <X className="w-3 h-3" />
+              <X className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
         
-        {/* Window content */}
-        <div className="flex-1 bg-gray-200 overflow-auto">
+        <div className="flex-1 bg-gray-900/90 overflow-auto">
           {children}
         </div>
       </div>

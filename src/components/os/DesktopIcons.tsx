@@ -21,10 +21,10 @@ const DesktopIcon: React.FC<DesktopIconProps> = ({
       onClick={onClick}
       onDoubleClick={onDoubleClick}
     >
-      <div className="w-16 h-16 flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
-        <img src={`/icons/${icon}`} alt={label} className="w-full h-full" />
+      <div className="w-16 h-16 flex items-center justify-center mb-1">
+        <img src={icon} alt={label} className="w-12 h-12" />
       </div>
-      <div className="text-white text-xs font-pixel px-2 py-1 bg-blue-900 bg-opacity-50 group-hover:bg-blue-800 rounded">
+      <div className="px-3 py-1 rounded-lg bg-black/40 backdrop-blur-sm border border-[#ca942c]/20 shadow-lg text-[#ca942c] text-xs font-medium group-hover:bg-[#ca942c]/20 group-hover:text-white transition-all duration-300">
         {label}
       </div>
     </div>
@@ -48,42 +48,42 @@ const DesktopIcons: React.FC = () => {
   return (
     <div className="absolute top-4 left-4 grid grid-cols-1 gap-6">
       <DesktopIcon 
-        icon="terminal.png"
+        icon="/icons/terminal.png"
         label="Terminal"
         onClick={() => handleIconClick('terminal')}
         onDoubleClick={() => handleIconDoubleClick('terminal')}
       />
       
       <DesktopIcon 
-        icon="notepad.png"
+        icon="/icons/notepad.png"
         label="Resume.txt"
         onClick={() => handleIconClick('notepad')}
         onDoubleClick={() => handleIconDoubleClick('notepad')}
       />
       
       <DesktopIcon 
-        icon="projects.png"
+        icon="/icons/projects.png"
         label="Projects"
         onClick={() => handleIconClick('explorer')}
         onDoubleClick={() => handleIconDoubleClick('explorer')}
       />
       
       <DesktopIcon 
-        icon="media.png"
+        icon="/icons/media.png"
         label="Media Player"
         onClick={() => handleIconClick('mediaPlayer')}
         onDoubleClick={() => handleIconDoubleClick('mediaPlayer')}
       />
       
       <DesktopIcon 
-        icon="pacman.png"
+        icon="/icons/pacman.png"
         label="Pac-Man"
         onClick={() => handleIconClick('pacman')}
         onDoubleClick={() => handleIconDoubleClick('pacman')}
       />
       
       <DesktopIcon 
-        icon="recycle.png"
+        icon="/icons/recycle.png"
         label="Recycle Bin"
         onClick={() => handleIconClick('recycleBin')}
         onDoubleClick={() => handleIconDoubleClick('recycleBin')}
