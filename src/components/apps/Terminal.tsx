@@ -87,7 +87,7 @@ Contact Information:
     } else if (lowerCmd === 'ls') {
       output = `
 Directory listing:
-resume.txt
+resume.pdf
 projects/
 games/
 contact.txt

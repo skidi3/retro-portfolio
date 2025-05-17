@@ -47,7 +47,7 @@ const getDefaultWindowConfig = (id: string): Window => {
       size: { width: 600, height: 400 }
     },
     notepad: {
-      title: 'Resume.txt - Notepad',
+      title: 'Resume.pdf - Notepad',
       icon: FileText,
       position: { x: 150, y: 120 },
       size: { width: 500, height: 600 }

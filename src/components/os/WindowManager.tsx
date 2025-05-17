@@ -7,6 +7,7 @@ import MediaPlayer from '../apps/MediaPlayer';
 import PacMan from '../apps/PacMan';
 import RecycleBin from '../apps/RecycleBin';
 import { useStore } from '../../store';
+import Experience from '../apps/Experience';
 
 const WindowManager: React.FC = () => {
   const { windows, activeWindowId } = useStore();
@@ -32,6 +33,8 @@ const WindowManager: React.FC = () => {
         return <PacMan />;
       case 'recycleBin':
         return <RecycleBin />;
+      case 'experience':
+        return <Experience />;
       default:
         return <div>Window content not found</div>;
     }
@@ -40,6 +43,7 @@ const WindowManager: React.FC = () => {
   return (
     <>
       {Object.entries(windows)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .filter(([_, window]) => !window.minimized)
         .sort(([idA], [idB]) => {
           // Sort by z-index (active window last)

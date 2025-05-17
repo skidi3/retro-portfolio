@@ -8,12 +8,12 @@ const Loading: React.FC = () => {
   const { playSound } = useAudio();
 
   const bootStages = [
-    { text: "BIOS INITIALIZATION", delay: 1500 },
-    { text: "MEMORY TEST 640K OK", delay: 1000 },
-    { text: "HARD DISK DETECTED", delay: 1000 },
-    { text: "LOADING OPERATING SYSTEM...", delay: 2000 },
-    { text: "WELCOME TO RETRO OS", delay: 1500 },
-    { text: "STARTING DESKTOP ENVIRONMENT...", delay: 2000 },
+    { text: "BIOS INITIALIZATION", delay: 1 },
+    { text: "MEMORY TEST 640K OK", delay: 1},
+    { text: "HARD DISK DETECTED", delay: 1 },
+    { text: "LOADING OPERATING SYSTEM...", delay: 2 },
+    { text: "WELCOME TO RETRO OS", delay: 1 },
+    { text: "STARTING DESKTOP ENVIRONMENT...", delay: 2},
   ];
 
   const handleKeyPress = useCallback(() => {

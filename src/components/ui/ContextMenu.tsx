@@ -102,50 +102,21 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ x, y, onClose }) => {
   return (
     <div
       ref={contextMenuRef}
-      className="absolute bg-gray-300 border border-gray-700 shadow-lg z-50 w-48"
+      className="context-menu absolute z-50"
       style={{
         left: adjustedPosition.x,
         top: adjustedPosition.y,
       }}
     >
-      <div 
-        className="p-2 hover:bg-blue-700 hover:text-white cursor-pointer border-b border-gray-400"
-        onClick={() => handleMenuItemClick('view')}
-      >
-        View
-      </div>
-      <div 
-        className="p-2 hover:bg-blue-700 hover:text-white cursor-pointer border-b border-gray-400"
-        onClick={() => handleMenuItemClick('refresh')}
-      >
-        Refresh
-      </div>
-      <div 
-        className="p-2 hover:bg-blue-700 hover:text-white cursor-pointer border-b border-gray-400"
-        onClick={() => handleMenuItemClick('properties')}
-      >
-        Properties
-      </div>
-      <div 
-        className="p-2 hover:bg-blue-700 hover:text-white cursor-pointer border-b border-gray-400"
-        onClick={() => handleMenuItemClick('install')}
-      >
-        Install Developer 🧠
-      </div>
-      <div 
-        className="p-2 hover:bg-blue-700 hover:text-white cursor-pointer border-b border-gray-400"
-        onClick={() => handleMenuItemClick('hack')}
-      >
-        Hack Portfolio
-      </div>
-      <div 
-        className="p-2 hover:bg-blue-700 hover:text-white cursor-pointer"
-        onClick={() => handleMenuItemClick('runVirus')}
-      >
-        Run Virus.exe
-      </div>
+      <div className="context-menu-item" onClick={() => handleMenuItemClick('view')}>View</div>
+      <div className="context-menu-item" onClick={() => handleMenuItemClick('refresh')}>Refresh</div>
+      <div className="context-menu-item" onClick={() => handleMenuItemClick('properties')}>Properties</div>
+      <div className="context-menu-item" onClick={() => handleMenuItemClick('install')}>Install Developer 🧠</div>
+      <div className="context-menu-item" onClick={() => handleMenuItemClick('hack')}>Hack Portfolio</div>
+      <div className="context-menu-item" onClick={() => handleMenuItemClick('runVirus')}>Run Virus.exe</div>
     </div>
   );
+  
 };
 
 export default ContextMenu;

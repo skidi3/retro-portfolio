@@ -20,12 +20,21 @@ const DesktopIcon: React.FC<DesktopIconProps> = ({
       onClick={onClick}
       onDoubleClick={onDoubleClick}
     >
-      <div className="w-12 h-12 bg-white bg-opacity-20 rounded flex items-center justify-center mb-1">
-        <Icon className="w-8 h-8 text-white" />
+      <div className="w-12 h-12  bg-opacity-20 rounded flex items-center justify-center mb-1">
+        <Icon className="w-8 h-8" />
       </div>
-      <div className="text-white text-xs font-pixel px-1 py-0.5 bg-blue-900 bg-opacity-50">
-        {label}
-      </div>
+      <div
+  className="text-[11px] font-[Perfect DOS VGA 437] leading-none"
+  style={{
+    color: '#f5b63d',
+    background: 'transparent',
+    textShadow: '1px 1px 0 #6b3c0b',
+    padding: '2px 0',
+    marginTop: '2px',
+  }}
+>
+  {label}
+</div>
     </div>
   );
 };

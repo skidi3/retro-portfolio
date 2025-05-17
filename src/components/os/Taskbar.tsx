@@ -10,13 +10,12 @@ const Taskbar: React.FC = () => {
 
   const toggleStartMenu = () => {
     playSound('click');
-    setShowStartMenu(!showStartMenu);
+    setShowStartMenu(prev => !prev);
   };
 
   const handleStartMenuItem = (action: string) => {
     playSound('click');
     setShowStartMenu(false);
-
     switch (action) {
       case 'terminal':
         openWindow('terminal');
@@ -48,69 +47,73 @@ const Taskbar: React.FC = () => {
   };
 
   return (
-    <div className="h-12 bg-[#ca942c] bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TtSIVBTuIOGSoThZERRy1CkWoEGqFVh1MLv2CJg1Jiouj4Fpw8GOx6uDirKuDqyAIfoA4OTopukiJ/0sKLWI8OO7Hu3uPu3eAUC8zzeoYBzTdNlOJuJjJroqhVwQxghDiiMjM1OckKQXf8XWPAF/vYjzL/9yfo1fNWQwIiMSzzDBt4g3i6U3b4LxPHGFFWSU+Jx4z6YLEj1xXPH7jXHBZ4JkRM52aJ44Qi4U2VtqYFU2NeIo4qmo65QsZj1XOW5y1cpU178lfGM7pK8tcpzmEBBaxBIk6UlBFCWW0UYONOl0nxUKKznE//oGrT4GcUqg0YODgMRqGwC93/5+9u7UwMeEmBWJA94ttf4wAoV2g0bLt72Pbbp0A/mfgSuv4a02g+Et6ra0FHwCD28DFdVuT94DLHWDwSZcMyZH8NIVCAXg/o2/KAYNboHfN7a21j9MHIENdLd0AB4fASJGy133e3d3Z279nWv39AFlNcp0UUpxCAAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+ULHhQMEwQr/aYAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAFElEQVRo3u3BAQ0AAADCoPdPbQ43oAAAAAAAfgwNOgABa5xH6wAAAABJRU5ErkJggg==')] shadow-lg flex items-center px-2 z-40">
-      {/* Start button */}
-      <button 
-        className={`px-4 h-8 font-medium flex items-center space-x-2 rounded ${
-          showStartMenu ? 'bg-black/30' : 'hover:bg-black/20'
-        } transition-colors`}
-        onClick={toggleStartMenu}
-      >
-        <Monitor className="w-4 h-4" />
-        <span>Start</span>
-      </button>
-      
-      {/* Start menu */}
+    <>
+      {/* Taskbar */}
+      <div className="taskbar fixed bottom-0 left-0 right-0 z-40 h-10 flex items-center px-2 shadow-md">
+        {/* Start button */}
+        <button
+          className={`taskbar-button flex items-center gap-2 ${showStartMenu ? 'bg-blue-800 text-white' : ''}`}
+          onClick={toggleStartMenu}
+        >
+          <Monitor className="w-4 h-4" />
+          <span className="text-sm font-bold">Start</span>
+        </button>
+
+        {/* Running Windows */}
+        <div className="flex-1 flex gap-1 overflow-x-auto ml-2 h-full">
+          {Object.entries(windows).map(([id, win]) => (
+            <button
+              key={id}
+              className={`taskbar-button flex items-center gap-2 px-2 truncate ${
+                activeWindowId === id ? 'bg-blue-800 text-white' : ''
+              }`}
+              onClick={() => handleTaskbarItemClick(id)}
+            >
+              <win.icon className="w-4 h-4" />
+              <span className="text-sm truncate">{win.title}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Clock */}
+        <div className="text-sm px-2 font-mono">
+          {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        </div>
+      </div>
+
+      {/* Start Menu */}
       {showStartMenu && (
-        <div className="absolute bottom-12 left-2 w-64 bg-[#ca942c] bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TtSIVBTuIOGSoThZERRy1CkWoEGqFVh1MLv2CJg1Jiouj4Fpw8GOx6uDirKuDqyAIfoA4OTopukiJ/0sKLWI8OO7Hu3uPu3eAUC8zzeoYBzTdNlOJuJjJroqhVwQxghDiiMjM1OckKQXf8XWPAF/vYjzL/9yfo1fNWQwIiMSzzDBt4g3i6U3b4LxPHGFFWSU+Jx4z6YLEj1xXPH7jXHBZ4JkRM52aJ44Qi4U2VtqYFU2NeIo4qmo65QsZj1XOW5y1cpU178lfGM7pK8tcpzmEBBaxBIk6UlBFCWW0UYONOl0nxUKKznE//oGrT4GcUqg0YODgMRqGwC93/5+9u7UwMeEmBWJA94ttf4wAoV2g0bLt72Pbbp0A/mfgSuv4a02g+Et6ra0FHwCD28DFdVuT94DLHWDwSZcMyZH8NIVCAXg/o2/KAYNboHfN7a21j9MHIENdLd0AB4fASJGy133e3d3Z279nWv39AFlNcp0UUpxCAAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+ULHhQMEwQr/aYAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAFElEQVRo3u3BAQ0AAADCoPdPbQ43oAAAAAAAfgwNOgABa5xH6wAAAABJRU5ErkJggg==')] rounded-t-lg shadow-2xl border border-black/20 overflow-hidden">
-          <div className="p-4 bg-black/20 font-bold border-b border-black/20">
+        <div className="absolute bottom-10 left-2 w-56 bg-gray-300 border border-black shadow-xl z-50">
+          <div className="bg-blue-900 text-white font-bold px-3 py-2">
             RetroOS Portfolio
           </div>
-          <div className="p-2">
+          <div className="p-2 space-y-1">
             {[
               { id: 'terminal', label: 'Terminal' },
               { id: 'explorer', label: 'File Explorer' },
               { id: 'media', label: 'Media Player' },
               { id: 'games', label: 'Games' }
-            ].map(item => (
+            ].map(({ id, label }) => (
               <button
-                key={item.id}
-                className="w-full p-2 text-left hover:bg-black/20 rounded transition-colors"
-                onClick={() => handleStartMenuItem(item.id)}
+                key={id}
+                className="w-full text-left px-3 py-1 text-sm hover:bg-blue-800 hover:text-white rounded"
+                onClick={() => handleStartMenuItem(id)}
               >
-                {item.label}
+                {label}
               </button>
             ))}
-            <div className="border-t border-black/20 my-1" />
+            <div className="border-t border-gray-500 my-1" />
             <button
-              className="w-full p-2 text-left hover:bg-red-900/30 rounded transition-colors flex items-center space-x-2"
+              className="w-full text-left px-3 py-1 text-sm text-red-700 hover:bg-red-800 hover:text-white rounded flex items-center gap-2"
               onClick={() => handleStartMenuItem('shutdown')}
             >
               <Power className="w-4 h-4" />
-              <span>Shut Down</span>
+              Shut Down
             </button>
           </div>
         </div>
       )}
-      
-      {/* Task items */}
-      <div className="flex-1 flex items-center h-full ml-2 space-x-1 overflow-x-auto">
-        {Object.values(windows).map(window => (
-          <button
-            key={window.id}
-            className={`h-8 px-3 text-sm flex items-center rounded transition-colors ${
-              activeWindowId === window.id 
-                ? 'bg-black/30' 
-                : 'hover:bg-black/20'
-            }`}
-            onClick={() => handleTaskbarItemClick(window.id)}
-          >
-            <window.icon className="w-4 h-4 mr-2" />
-            <span className="truncate">{window.title}</span>
-          </button>
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 

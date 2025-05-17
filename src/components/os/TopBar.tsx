@@ -7,9 +7,7 @@ const TopBar: React.FC = () => {
   const [currentLanguage, setCurrentLanguage] = useState('EN');
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -20,35 +18,35 @@ const TopBar: React.FC = () => {
     { code: 'DE', name: 'Deutsch' }
   ];
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString([], { 
+  const formatTime = (date: Date) =>
+    date.toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: true 
+      hour12: true
     });
-  };
 
   return (
-    <div className="h-8 bg-[#ca942c] bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TtSIVBTuIOGSoThZERRy1CkWoEGqFVh1MLv2CJg1Jiouj4Fpw8GOx6uDirKuDqyAIfoA4OTopukiJ/0sKLWI8OO7Hu3uPu3eAUC8zzeoYBzTdNlOJuJjJroqhVwQxghDiiMjM1OckKQXf8XWPAF/vYjzL/9yfo1fNWQwIiMSzzDBt4g3i6U3b4LxPHGFFWSU+Jx4z6YLEj1xXPH7jXHBZ4JkRM52aJ44Qi4U2VtqYFU2NeIo4qmo65QsZj1XOW5y1cpU178lfGM7pK8tcpzmEBBaxBIk6UlBFCWW0UYONOl0nxUKKznE//oGrT4GcUqg0YODgMRqGwC93/5+9u7UwMeEmBWJA94ttf4wAoV2g0bLt72Pbbp0A/mfgSuv4a02g+Et6ra0FHwCD28DFdVuT94DLHWDwSZcMyZH8NIVCAXg/o2/KAYNboHfN7a21j9MHIENdLd0AB4fASJGy133e3d3Z279nWv39AFlNcp0UUpxCAAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+ULHhQMEwQr/aYAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAFElEQVRo3u3BAQ0AAADCoPdPbQ43oAAAAAAAfgwNOgABa5xH6wAAAABJRU5ErkJggg==')] text-black flex items-center justify-between px-4">
-      <div className="text-sm font-medium">RetroOS</div>
-      
-      <div className="flex items-center space-x-4">
+    <div className="top-bar fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-[32px] text-[11px]  bg-[#c0c0c0] border-b-2 border-[#808080] shadow-[inset_-1px_-1px_#fff,inset_1px_1px_#000]">
+      <div className="font-bold text-black">RetroOS</div>
+
+      <div className="flex items-center gap-3 relative">
+        {/* Language Dropdown */}
         <div className="relative">
           <button
-            className="flex items-center space-x-1 text-sm hover:bg-black/20 px-2 py-1 rounded"
+            className="flex items-center gap-1 px-2 py-[2px] h-[22px] border-2 border-[#fff] shadow-[inset_-1px_-1px_#000,inset_1px_1px_#808080] bg-[#c0c0c0] hover:bg-[#d0d0d0]"
             onClick={() => setShowLanguageMenu(!showLanguageMenu)}
           >
-            <Globe className="w-4 h-4" />
+            <Globe className="w-3 h-3" />
             <span>{currentLanguage}</span>
             <ChevronDown className="w-3 h-3" />
           </button>
-          
+
           {showLanguageMenu && (
-            <div className="absolute top-full right-0 mt-1 bg-[#ca942c] bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TtSIVBTuIOGSoThZERRy1CkWoEGqFVh1MLv2CJg1Jiouj4Fpw8GOx6uDirKuDqyAIfoA4OTopukiJ/0sKLWI8OO7Hu3uPu3eAUC8zzeoYBzTdNlOJuJjJroqhVwQxghDiiMjM1OckKQXf8XWPAF/vYjzL/9yfo1fNWQwIiMSzzDBt4g3i6U3b4LxPHGFFWSU+Jx4z6YLEj1xXPH7jXHBZ4JkRM52aJ44Qi4U2VtqYFU2NeIo4qmo65QsZj1XOW5y1cpU178lfGM7pK8tcpzmEBBaxBIk6UlBFCWW0UYONOl0nxUKKznE//oGrT4GcUqg0YODgMRqGwC93/5+9u7UwMeEmBWJA94ttf4wAoV2g0bLt72Pbbp0A/mfgSuv4a02g+Et6ra0FHwCD28DFdVuT94DLHWDwSZcMyZH8NIVCAXg/o2/KAYNboHfN7a21j9MHIENdLd0AB4fASJGy133e3d3Z279nWv39AFlNcp0UUpxCAAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+ULHhQMEwQr/aYAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAFElEQVRo3u3BAQ0AAADCoPdPbQ43oAAAAAAAfgwNOgABa5xH6wAAAABJRU5ErkJggg==')] rounded-lg shadow-xl border border-black/20 py-1 min-w-[120px]">
-              {languages.map(lang => (
+            <div className="absolute right-0 mt-1 w-32 border-2 border-[#000] bg-[#f0f0f0] shadow-[2px_2px_#808080] z-50">
+              {languages.map((lang) => (
                 <button
                   key={lang.code}
-                  className="w-full text-left px-3 py-1.5 text-sm hover:bg-black/20 transition-colors"
+                  className="w-full text-left px-2 py-1 hover:bg-[#000080] hover:text-white font-mono text-[11px]"
                   onClick={() => {
                     setCurrentLanguage(lang.code);
                     setShowLanguageMenu(false);
@@ -60,8 +58,9 @@ const TopBar: React.FC = () => {
             </div>
           )}
         </div>
-        
-        <div className="text-sm font-medium">
+
+        {/* Time Display */}
+        <div className="h-[22px] px-3 flex items-center bg-white text-black border-2 border-[#808080] shadow-[inset_-1px_-1px_#fff,inset_1px_1px_#000]">
           {formatTime(currentTime)}
         </div>
       </div>
