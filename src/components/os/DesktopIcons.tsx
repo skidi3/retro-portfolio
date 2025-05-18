@@ -17,23 +17,26 @@ const DesktopIcon: React.FC<DesktopIconProps> = ({
 }) => {
   return (
     <div
-      className="desktop-icon cursor-pointer select-none group"
+      className="cursor-pointer select-none group flex flex-col items-center w-20 mb-6"
       onClick={onClick}
       onDoubleClick={onDoubleClick}
     >
-      <img src={icon} alt={label} className="w-10 h-10 mx-auto mb-1" />
+      <img
+        src={icon}
+        alt={label}
+        className="w-14 h-14 mb-1 drop-shadow-md group-hover:scale-105 transition-transform duration-150"
+      />
       <div
-  className="text-[11px] font-[Perfect DOS VGA 437] leading-none"
-  style={{
-    backgroundColor: 'transparent',
-    color: '#f5b63d',
-    textShadow: '1px 1px 0 #6b3c0b',
-    padding: '2px 0',
-    marginTop: '2px',
-  }}
->
-  {label}
-</div>
+        className="text-[13px] font-semibold text-center leading-tight"
+        style={{
+          backgroundColor: 'transparent',
+          color: '#f5b63d',
+          textShadow: '1px 1px 0 #6b3c0b',
+          padding: '2px 0',
+        }}
+      >
+        {label}
+      </div>
     </div>
   );
 };
@@ -53,7 +56,18 @@ const DesktopIcons: React.FC = () => {
   };
 
   return (
-    <div className="absolute top-10 left-2 flex flex-col gap-6 z-10">
+    <div
+      className="absolute top-[50px] left-4 z-10"
+      style={{
+        display: 'grid',
+        gridAutoFlow: 'row',
+        gridTemplateRows: 'repeat(auto-fill, minmax(90px, 1fr))',
+        gridAutoColumns: 'min-content',
+        maxHeight: 'calc(100vh - 140px)', // adjust based on topbar/taskbar height
+        overflow: 'hidden',
+        gap: '15px'
+      }}
+    >
       {[
         ['terminal', 'Terminal', '/icons/terminal.png'],
         ['notepad', 'Resume.pdf', '/icons/notepad.png'],
@@ -61,8 +75,7 @@ const DesktopIcons: React.FC = () => {
         ['explorer', 'Projects', '/icons/projects.png'],
         ['pacman', 'Pac-Man', '/icons/pacman.png'],
         ['recycleBin', 'Recycle Bin', '/icons/recycle.png'],
-        ['experience', 'Experience', '/icons/experience.png']
-
+        ['experience', 'Experience', '/icons/experience.png'],
       ].map(([id, label, icon]) => (
         <DesktopIcon
           key={id}

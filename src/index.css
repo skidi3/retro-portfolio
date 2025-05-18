@@ -7,8 +7,19 @@
 /* --- Windows 98 Style --- */
 
 body {
-  font-family:  monospace; /* retro font */
-  background-color: #008080; /* teal classic background */
+  font-family: 'Manrope', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 800 !important;
+  text-transform: lowercase;
+}
+
+p, span, div, li, td, th {
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 /* Scrollbar - Windows 98 grayish tones */
@@ -58,7 +69,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 24px;
+  height: 35px;
 }
 
 .window-content {

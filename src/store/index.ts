@@ -47,7 +47,7 @@ const getDefaultWindowConfig = (id: string): Window => {
       size: { width: 600, height: 400 }
     },
     notepad: {
-      title: 'Resume.pdf - Notepad',
+      title: 'Resume',
       icon: FileText,
       position: { x: 150, y: 120 },
       size: { width: 500, height: 600 }
@@ -78,6 +78,12 @@ const getDefaultWindowConfig = (id: string): Window => {
     },
     viewer: {
       title: 'Image Viewer',
+      icon: Image,
+      position: { x: 400, y: 150 },
+      size: { width: 600, height: 500 }
+    },
+    experience: {
+      title: 'Experience',
       icon: Image,
       position: { x: 400, y: 150 },
       size: { width: 600, height: 500 }

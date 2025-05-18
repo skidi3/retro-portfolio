@@ -27,7 +27,7 @@ const TopBar: React.FC = () => {
 
   return (
     <div className="top-bar fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-[32px] text-[11px]  bg-[#c0c0c0] border-b-2 border-[#808080] shadow-[inset_-1px_-1px_#fff,inset_1px_1px_#000]">
-      <div className="font-bold text-black">RetroOS</div>
+      <div className="font-bold text-black">Yet another portfolio</div>
 
       <div className="flex items-center gap-3 relative">
         {/* Language Dropdown */}
@@ -60,9 +60,9 @@ const TopBar: React.FC = () => {
         </div>
 
         {/* Time Display */}
-        <div className="h-[22px] px-3 flex items-center bg-white text-black border-2 border-[#808080] shadow-[inset_-1px_-1px_#fff,inset_1px_1px_#000]">
-          {formatTime(currentTime)}
-        </div>
+        <div className="h-[24px] px-10 py-[6px] flex items-center bg-white text-black border-2 border-[#808080] shadow-[inset_-1px_-1px_#fff,inset_1px_1px_#000]">
+  {formatTime(currentTime)}
+</div>
       </div>
     </div>
   );

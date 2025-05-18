@@ -1,72 +1,32 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStore } from '../../store';
 import { useAudio } from '../../hooks/useAudio';
 
 const Loading: React.FC = () => {
-  const [bootStage, setBootStage] = useState(0);
   const { completeBootSequence } = useStore();
   const { playSound } = useAudio();
+  const [show, setShow] = useState(false);
 
-  const bootStages = [
-    { text: "BIOS INITIALIZATION", delay: 1 },
-    { text: "MEMORY TEST 640K OK", delay: 1},
-    { text: "HARD DISK DETECTED", delay: 1 },
-    { text: "LOADING OPERATING SYSTEM...", delay: 2 },
-    { text: "WELCOME TO RETRO OS", delay: 1 },
-    { text: "STARTING DESKTOP ENVIRONMENT...", delay: 2},
-  ];
+  useEffect(() => {
+    setShow(true);
+    playSound();
 
-  const handleKeyPress = useCallback(() => {
-    if (bootStage === bootStages.length) {
+    const timeout = setTimeout(() => {
       completeBootSequence();
-    }
-  }, [bootStage, completeBootSequence]);
+    }, 100); // boot duration
 
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [handleKeyPress]);
-
-  useEffect(() => {
-    let mounted = true;
-    let timeoutId: NodeJS.Timeout;
-
-    const advanceBootSequence = () => {
-      if (!mounted || bootStage >= bootStages.length) return;
-
-      timeoutId = setTimeout(() => {
-        if (mounted) {
-          playSound();
-          setBootStage(prev => prev + 1);
-        }
-      }, bootStages[bootStage].delay);
-    };
-
-    advanceBootSequence();
-
-    return () => {
-      mounted = false;
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, [bootStage, bootStages.length, playSound]);
+    return () => clearTimeout(timeout);
+  }, [completeBootSequence, playSound]);
 
   return (
-    <div className="fixed inset-0 bg-black text-green-500 font-mono p-8 flex flex-col">
-      <div className="text-xl mb-8">RETRO OS BOOT v1.0</div>
-      <div className="flex-1">
-        {bootStages.slice(0, bootStage).map((stage, index) => (
-          <div key={index} className="mb-4">
-            {stage.text}
-            {index === bootStage - 1 && <span className="animate-pulse">_</span>}
-          </div>
-        ))}
-      </div>
-      <div className="mt-auto text-center">
-        {bootStage === bootStages.length && (
-          <div className="text-xl animate-pulse">
-            PRESS ANY KEY TO CONTINUE...
-          </div>
-        )}
+    <div className="fixed inset-0 bg-[#000080] flex items-center justify-center text-white font-['Perfect DOS VGA 437'] z-50">
+      <div
+        className={`transition-all duration-700 ease-out transform ${
+          show ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        } flex flex-col items-center`}
+      >
+        <div className="text-4xl tracking-wider mb-2">RETRO OS</div>
+        <div className="text-sm text-gray-200">Loading...</div>
       </div>
     </div>
   );

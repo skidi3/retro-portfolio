@@ -117,7 +117,7 @@ const Experience: React.FC = () => {
     : EXPERIENCE.filter((e) => e.type === filter);
 
   return (
-    <div className="p-4 text-sm text-gray-800 font-['Perfect DOS VGA 437'] bg-white h-full overflow-auto">
+    <div className="p-4 text-sm text-gray-800 font-['Perfect DOS VGA 437'] bg-white h-full overflow-auto window-content">
       <div className="flex gap-2 mb-4 items-center">
         <span className="text-base font-bold">📁 Experience</span>
         <div className="ml-auto flex gap-2 text-xs">

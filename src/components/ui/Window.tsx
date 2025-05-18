@@ -86,13 +86,13 @@ const Window: React.FC<WindowProps> = ({
         <div className="flex gap-1">
           <button
             onClick={() => minimizeWindow(id)}
-            className="px-1 text-xs border bg-gray-200 hover:bg-gray-300"
+            className="px-1 text-xs border bg-teal-400 hover:bg-teal-800"
           >
             −
           </button>
           <button
             onClick={toggleMaximize}
-            className="px-1 text-xs border bg-gray-200 hover:bg-gray-300"
+            className="px-1 text-xs border bg-yellow-400 hover:bg-yellow-800"
           >
             □
           </button>

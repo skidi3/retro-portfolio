@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-three/drei": "^9.92.7",
     "@react-three/fiber": "^8.15.12",
+    "canvas-confetti": "^1.9.3",
     "framer-motion": "^10.16.4",
     "howler": "^2.2.4",
     "lucide-react": "^0.344.0",

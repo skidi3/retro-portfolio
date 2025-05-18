@@ -1,3 +1,5 @@
+
+// Enhanced Explorer.tsx (entire file)
 import React, { useState } from 'react';
 import {
   FolderOpen,
@@ -59,26 +61,41 @@ const Explorer: React.FC = () => {
       content: (
         <div className="p-4 prose max-w-none text-sm text-gray-800">
           <p>
-            LogicLens is an AI-powered personal LeetCode coach. It analyzes your submissions, detects patterns,
-            and builds a radar chart of your DSA skills across key topics.
+            LogicLens is your AI-powered DSA coach. Designed to transform the way developers approach LeetCode and competitive coding,
+            it analyzes your submission history and generates deep insights—making every session smarter, faster, and more efficient.
           </p>
+          <p>
+            What began as a side project quickly gained traction, with over <strong>1000+ users</strong> across Chrome and Web, and <strong>99.9% uptime</strong> tracked live via UptimeRobot.
+            It now powers mock interviews, error analysis, and personalized prep paths.
+          </p>
+          <h3 className="text-lg font-bold mt-6">Key Features</h3>
           <ul>
-            <li>📊 Radar-based strength analysis</li>
-            <li>💡 AI-generated error breakdowns</li>
-            <li>🎙️ Mock interview pad with voice assistant</li>
-            <li>🌐 Chrome extension for real-time feedback</li>
+            <li>📊 Radar Chart analysis of core DSA strengths</li>
+            <li>💡 AI-generated summaries of your most common logic errors</li>
+            <li>🎙️ Mock Interview Simulator with audio assistant</li>
+            <li>🧠 Real-time code feedback on LeetCode via Chrome Extension</li>
+            <li>📈 Submission timeline for tracking streaks, setbacks, and bouncebacks</li>
           </ul>
-
+          <h3 className="text-lg font-bold mt-6">Image Gallery</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-4">
+            {[1,2,3,4,5,6].map(i => (
+              <img
+                key={i}
+                src={`/images/logiclens/screenshot${i}.png`}
+                alt={`Screenshot ${i}`}
+                className="w-full rounded shadow-md"
+              />
+            ))}
+          </div>
           <h3 className="mt-6 text-lg font-bold">Tech Stack</h3>
           <div className="flex flex-wrap gap-2">
-            {['Next.js', 'Node.js', 'Python', 'LeetCode API', 'TRON (Web3)', 'Chrome Extension', 'Tailwind CSS'].map((t) => (
-              <span key={t} className="bg-gray-800 text-white px-2 py-0.5 rounded text-xs font-mono shadow">
-                {t}
+            {['Next.js', 'Node.js', 'Python', 'LeetCode API', 'TRON (Web3)', 'Chrome Extension', 'Tailwind CSS'].map((tech) => (
+              <span key={tech} className="bg-gray-800 text-white px-2 py-0.5 rounded text-xs font-mono shadow">
+                {tech}
               </span>
             ))}
           </div>
-
-          <h3 className="mt-6 text-lg font-bold">Stats</h3>
+          <h3 className="mt-6 text-lg font-bold">Performance Metrics</h3>
           <div className="grid grid-cols-2 gap-4">
             <div className="border rounded p-3 shadow">
               <p className="font-semibold">📈 1000+ Users</p>
@@ -89,7 +106,6 @@ const Explorer: React.FC = () => {
               <p className="text-xs text-gray-500">UptimeRobot monitored</p>
             </div>
           </div>
-
           <a
             href="https://logiclens.org"
             target="_blank"
@@ -102,67 +118,6 @@ const Explorer: React.FC = () => {
       ),
     },
     {
-      id: 'retro-portfolio',
-      name: 'Retro Portfolio OS',
-      description: 'Windows 98-style interactive portfolio',
-      category: 'personal',
-      files: [],
-      content: (
-        <div className="p-4 prose text-sm text-gray-800 max-w-none">
-          <p>
-            This website itself is a portfolio disguised as a retro OS. Built using React + Zustand, it simulates
-            draggable windows, boot screens, sound effects, and retro wallpaper with pixel icons.
-          </p>
-          <ul>
-            <li>🖼️ Icon-based launcher system</li>
-            <li>📁 File explorer + project viewer</li>
-            <li>🎮 Built-in Pac-Man, Notepad, and Resume Viewer</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
-      id: 'horizontal-surveys',
-      name: 'Horizontal Surveys – Bajaj Finserv',
-      description: 'No-code distributed survey platform (5M+ hits/day)',
-      category: 'work',
-      files: [],
-      content: (
-        <div className="p-4 prose text-sm text-gray-800 max-w-none">
-          <p>
-            An internal no-code tool for business teams to deploy multilingual NPS surveys via Excel sheets. Surveys
-            deployed in under 10 seconds using a distributed folder-based system.
-          </p>
-          <ul>
-            <li>⚡ Upload-to-live in 10 seconds</li>
-            <li>🌐 Multilingual support (vernacular Excel)</li>
-            <li>📦 5M+ daily hits handled with zero downtime</li>
-            <li>🧩 Built using Angular + Node.js</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
-      id: 'microfrontends-bajaj',
-      name: 'Microfrontend Architecture',
-      description: 'Webpack 5 + Angular-based modular platform',
-      category: 'work',
-      files: [],
-      content: (
-        <div className="p-4 prose text-sm text-gray-800 max-w-none">
-          <p>
-            Implemented module federation across teams at Bajaj Finserv to decouple releases, speed up deployment,
-            and reduce bugs.
-          </p>
-          <ul>
-            <li>🚀 40% faster deployment cycles</li>
-            <li>🔩 Shell-remote MFE setup with version control</li>
-            <li>📉 65% drop in release failures</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
       id: 'component-library',
       name: 'Reusable Component Library',
       description: 'Centralized design system with Storybook',
@@ -171,17 +126,102 @@ const Explorer: React.FC = () => {
       content: (
         <div className="p-4 prose text-sm text-gray-800 max-w-none">
           <p>
-            Internal component library built for reuse across frontend teams. Documented in Storybook, with theme
-            support and accessibility baked in.
+            Developed a Storybook-driven UI library to eliminate duplicated frontend efforts across teams. Components were designed with themeability, accessibility, and flexibility in mind.
           </p>
           <ul>
-            <li>📦 40+ reusable components</li>
-            <li>🖍️ Theming and accessibility support</li>
-            <li>📚 Used across 3+ teams via npm publish</li>
+            <li>📦 40+ reusable UI primitives & widgets</li>
+            <li>🖍️ Theming support via tokens + CSS vars</li>
+            <li>🚥 WCAG-compliant accessible components</li>
+            <li>📚 Rich docs + live playground for every component</li>
+          </ul>
+          <h3>Tech Stack</h3>
+          <div className="flex flex-wrap gap-2">
+            {['Angular', 'Storybook', 'SCSS', 'Figma Specs', 'Jest'].map((t) => (
+              <span key={t} className="bg-gray-800 text-white px-2 py-0.5 rounded text-xs font-mono shadow">
+                {t}
+              </span>
+            ))}
+          </div>
+          <h3 className="mt-4">Impact</h3>
+          <ul>
+            <li>👨‍💻 Adopted by 3+ teams across verticals</li>
+            <li>🔁 Consistent UI across complex flows like onboarding & payments</li>
+            <li>📦 Published on internal registry with CI/CD automation</li>
           </ul>
         </div>
-      ),
-    },
+      )
+    }
+,
+{
+  id: 'microfrontends-bajaj',
+  name: 'Microfrontend Architecture',
+  description: 'Webpack 5 + Angular-based modular platform',
+  category: 'work',
+  files: [],
+  content: (
+    <div className="p-4 prose text-sm text-gray-800 max-w-none">
+      <p>
+        Introduced and scaled a production-grade microfrontend architecture at Bajaj Finserv, enabling cross-team ownership and modular app releases.
+      </p>
+      <ul>
+        <li>🔩 Shell/Remote architecture with independent deploys</li>
+        <li>🧱 Shared UI & Auth modules served across 8+ apps</li>
+        <li>⚙️ Version locking + rollout/rollback strategies</li>
+      </ul>
+      <h3>Tech Stack</h3>
+      <div className="flex flex-wrap gap-2">
+        {['Angular', 'Webpack 5', 'Module Federation', 'Nx', 'TypeScript'].map((t) => (
+          <span key={t} className="bg-gray-800 text-white px-2 py-0.5 rounded text-xs font-mono shadow">
+            {t}
+          </span>
+        ))}
+      </div>
+      <h3 className="mt-4">Impact</h3>
+      <ul>
+        <li>🚀 40% faster release cycles</li>
+        <li>✅ 65% reduction in deployment failures</li>
+        <li>📦 Modules published to internal registry for instant reuse</li>
+      </ul>
+    </div>
+  )
+}
+,
+{
+  id: 'horizontal-surveys',
+  name: 'Horizontal Surveys – Bajaj Finserv',
+  description: 'No-code distributed survey platform (5M+ hits/day)',
+  category: 'work',
+  files: [],
+  content: (
+    <div className="p-4 prose text-sm text-gray-800 max-w-none">
+      <p>
+        Horizontal Surveys is a flagship internal platform at Bajaj Finserv built to empower PMO and business units to launch multilingual surveys at scale — without needing engineers.
+      </p>
+      <ul>
+        <li>⚡ Upload-to-live NPS surveys in under 10 seconds</li>
+        <li>🌐 Multi-language support via Excel ingestion</li>
+        <li>📦 5M+ daily hits powered by a distributed Node.js backend</li>
+        <li>🛡️ Load-balanced + fault-tolerant with zero downtime</li>
+      </ul>
+      <h3>Tech Stack</h3>
+      <div className="flex flex-wrap gap-2">
+        {['Angular', 'Node.js', 'Redis', 'Azure', 'Distributed Systems'].map((t) => (
+          <span key={t} className="bg-gray-800 text-white px-2 py-0.5 rounded text-xs font-mono shadow">
+            {t}
+          </span>
+        ))}
+      </div>
+      <h3 className="mt-4">Impact</h3>
+      <ul>
+        <li>🧠 Reduced manual survey launch time from 1 day to 10 seconds</li>
+        <li>📈 99.9% uptime across festive seasons</li>
+        <li>💡 Enabled business teams to launch feedback campaigns with zero tech dependency</li>
+      </ul>
+    </div>
+  )
+}
+
+
   ];
 
   const filteredProjects =
@@ -218,26 +258,20 @@ const Explorer: React.FC = () => {
           <div className="flex gap-2 mb-4">
             <button
               onClick={() => setFilter('all')}
-              className={`px-3 py-1 text-xs rounded ${
-                filter === 'all' ? 'bg-black text-white' : 'bg-gray-300'
-              }`}
+              className={`px-3 py-1 text-xs rounded \${filter === 'all' ? 'bg-black text-white' : 'bg-gray-300'}`}
             >
               All
             </button>
             <button
               onClick={() => setFilter('personal')}
-              className={`px-3 py-1 text-xs rounded ${
-                filter === 'personal' ? 'bg-yellow-500 text-black' : 'bg-gray-300'
-              }`}
+              className={`px-3 py-1 text-xs rounded \${filter === 'personal' ? 'bg-yellow-500 text-black' : 'bg-gray-300'}`}
             >
               <Laptop2 className="inline-block w-4 h-4 mr-1" />
               Personal
             </button>
             <button
               onClick={() => setFilter('work')}
-              className={`px-3 py-1 text-xs rounded ${
-                filter === 'work' ? 'bg-blue-500 text-white' : 'bg-gray-300'
-              }`}
+              className={`px-3 py-1 text-xs rounded \${filter === 'work' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
             >
               <Briefcase className="inline-block w-4 h-4 mr-1" />
               Work
@@ -272,7 +306,6 @@ const Explorer: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      {/* Top Toolbar */}
       <div className="bg-gray-200 p-2 border-b border-gray-400 flex items-center space-x-2">
         <button
           className="px-3 py-1 text-sm bg-gray-300 hover:bg-gray-400 flex items-center"
@@ -294,10 +327,8 @@ const Explorer: React.FC = () => {
         <div className="text-sm flex-1">Address: {currentPath}</div>
       </div>
 
-      {/* Main */}
       <div className="flex-1 overflow-auto">{renderContent()}</div>
 
-      {/* Bottom bar */}
       <div className="bg-gray-200 p-1 border-t border-gray-400 text-xs">
         {currentPath === 'C:\\Projects'
           ? `${filteredProjects.length} project(s)`
