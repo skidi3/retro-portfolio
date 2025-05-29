@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import Taskbar from './Taskbar';
-import TopBar from './TopBar';
-import DesktopIcons from './DesktopIcons';
-import WindowManager from './WindowManager';
-import ContextMenu from '../ui/ContextMenu';
-import { useAudio } from '../../hooks/useAudio';
+import React, { useState } from "react";
+import Taskbar from "./Taskbar";
+import TopBar from "./TopBar";
+import DesktopIcons from "./DesktopIcons";
+import WindowManager from "./WindowManager";
+import ContextMenu from "../ui/ContextMenu";
+import { useAudio } from "../../hooks/useAudio";
 
 const Desktop: React.FC = () => {
-  const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0 });
+  const [contextMenu, setContextMenu] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+  });
   const { playSound } = useAudio();
-  
+
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     setContextMenu({
@@ -19,11 +23,11 @@ const Desktop: React.FC = () => {
     });
     playSound();
   };
-  
+
   const handleCloseContextMenu = () => {
     setContextMenu({ ...contextMenu, visible: false });
   };
-  
+
   const handleDesktopClick = () => {
     if (contextMenu.visible) {
       handleCloseContextMenu();
@@ -36,39 +40,29 @@ const Desktop: React.FC = () => {
       <div className="flex-1 relative overflow-hidden">
         {/* Wallpaper */}
         <div className="absolute inset-0">
-          {/* <img 
-            src="/textures/wallpaper.jpg"
+          <img 
+            src="/icons/xp-bg.webp"
             alt="Wallpaper"
             className="w-full h-full object-cover"
+          />
+          {/* <video
+            src="/textures/bg-retro.mp4"
+            className="absolute inset-0 w-full h-full "
+            autoPlay
+            loop
+            muted
+            playsInline
           /> */}
-          <video
-  src="/textures/bg-retro.mp4"
-  className="absolute inset-0 w-full h-full "
-  autoPlay
-  loop
-  muted
-  playsInline
-/>
         </div>
 
-       
-        
-        <div 
+        <div
           className="relative w-full h-full "
           onContextMenu={handleContextMenu}
           onClick={handleDesktopClick}
         >
-          <br/>
+          <br />
           <DesktopIcons />
           <WindowManager />
-          
-          {contextMenu.visible && (
-            <ContextMenu 
-              x={contextMenu.x} 
-              y={contextMenu.y} 
-              onClose={handleCloseContextMenu}
-            />
-          )}
         </div>
       </div>
       <Taskbar />
